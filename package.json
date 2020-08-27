@@ -1,0 +1,22 @@
+{
+  "name": "discbot",
+  "version": "1.0.0",
+  "description": "first discord bot",
+  "main": "disc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "isaac",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "github:discordjs/discord.js",
+    "discord.js-commando": "github:discordjs/Commando",
+    "ffmpeg-static": "^4.2.7",
+    "node-opus": "^0.3.3",
+    "opus": "0.0.0",
+    "random-puppy": "^1.1.0",
+    "simple-youtube-api": "^5.2.1",
+    "snekfetch": "^4.0.4",
+    "ytdl-core": "^3.2.2"
+  }
+}
