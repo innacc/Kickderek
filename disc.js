@@ -249,5 +249,5 @@ if (command === "cease") {
 });
 
 
-client.login('NzQ2OTAwOTY0MTI0MDAwMjc4.X0HDug.skWsFgpUTsqrzfC-hKA1AYJbLpc');
+client.login('Token');
 
