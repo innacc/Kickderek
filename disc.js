@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const randomPuppy = require('random-puppy');
 const request = require('snekfetch');
+const unirest = require('unirest');
 client = new Discord.Client();
 
 const talkedRecently = new Set();
@@ -9,33 +10,60 @@ const talkrecentmeme = new Set();
 
 const prefix = '-';
 
+function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+      currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+  }
+  
+
 client.once('ready', () => {
     console.log('online');
 });
 
 
-
 client.on('message', message =>{
-    const oreeo = message.content;
-    
-if(oreeo === 'oreeo'){
+    const command = message.content.toLowerCase();
+
+
+if(message.content.startsWith('you are')) {
+    message.reply('no u');
+}
+
+if(command === 'oreeo'){
     message.channel.send('https://www.youtube.com/watch?v=sXxbkjlHvf4');
 }
 
+if(command == 'sao'){
+    message.channel.send('<@621478310433652746>');
+}
 
-const reereturn = message.content;
 
-    
-if(reereturn === 'ree'){
-    message.channel.send('Imagine saying ree');
+if(command === 'uwu'){
+    message.channel.send('oWo');
 }
 
 
 
-const furo = message.content;
+if(command === 'owo'){
+    message.channel.send('you thought I was going to say uwu');
+}
+
+
+
     
-if(furo === 'o'){
-    message.channel.send('Frick ur o');
+if(command === 'ree'){
+    message.channel.send('Imagine saying Ree');
+}
+
+
+
+
+    
+if(command === 'o'){
+    message.channel.send('Frick ur O');
 }
 
 });
@@ -60,6 +88,11 @@ client.on('message', message =>{
         { name: '-userinfo', value: 'gives user info'},	
         { name: '-warn @person reason', value: 'warns someone (go crazy)'},
         { name: '-ouioui', value: 'plays the song'},
+        { name:  '-derek', value: 'does dereks special move'},
+        { name: 'words bot responds to', value: 'you are, ree, o, oreeo, sao, uwu, owo'},
+        {name: '-insult @person', value:'sends the person a mediocre to bad insult'},
+        {name: '-meme', value:'sends bad meme'},
+
     )
     message.channel.send(helpembed);
 
@@ -109,9 +142,8 @@ talkedRecently.add(message.author.username);
     }
 
     if(command === 'meme'){
-        if (talkrecentmeme.has(message.author.username)) {
-            message.channel.send("Wait 3 second before getting typing this again " + message.author.username);
-    } else { 
+        
+     
 
             let reddit = [
                 "Shitty_Car_Mods",
@@ -142,9 +174,10 @@ talkedRecently.add(message.author.username);
           // Removes the user from the set after a minute
           talkrecentmeme.delete(message.author.username);
         }, 3000);
-    }
+    };
+
+
         
-        };
 
         if (command === "ouioui") {
             var VC = message.member.voice.channel;
@@ -152,14 +185,69 @@ talkedRecently.add(message.author.username);
                 return message.reply("Get in a vc dumbass")
         VC.join()
             .then(connection => {
-                const dispatcher = connection.play('/home/isaac/discbot/ree.mp3');
-                dispatcher.on("end", end => {VC.leave()});
+                const dispatcher = connection.play('/home/admin/discbot/ree.mp3');
+                dispatcher.on("end", () => {VC.leave()});
             })
             .catch(console.error);
     };
+
+    if (command === "discord") {
+        var VCcc = message.member.voice.channel;
+        if (!VCcc)
+            return message.reply("Get in a vc dumbass")
+    VCcc.join()
+        .then(connection => {
+            const dispatcher = connection.play('/home/admin/discbot/discord.mp3');
+            dispatcher.on("end", () => {VCcc.leave()});
+        })
+        .catch(console.error);
+};
+
+    if (command === "derek") {
+        var VCc = message.member.voice.channel;
+        if (!VCc)
+            return message.reply("Get in a vc dumbass")
+    VCc.join()
+    sleep(2000);
+            VCc.leave()
+        
+        
+};
+if (command === 'insult') {
+    var req = unirest('GET', 'https://insult.mattbas.org/api/insult');
+    let Member = message.mentions.members.first();
+    if(!Member) {
+        message.reply('Bruv you gotta mention someone');
+        return;
+   }
+
+        req.end((res) => {
+			if (res.error) {
+				errorMessage();
+				throw new Error(res.error);
+			}
+            try{
+                var insult = res.raw_body.toLowerCase();
+                message.channel.send('<@' + Member +'>' + ', ' + insult + '.')
+            } catch (error) {
+                message.channel.send('isaac borked the code')
+            }
+        })
+    
+};
+
+if (command === "cease") {
+    var VCccc = message.member.voice.channel;
+    if (!VCccc)
+        return message.reply("i aint in")
+        VCccc.leave()
+    
+    
+};
         
     
 });
 
-client.login('token');
+
+client.login('NzQ2OTAwOTY0MTI0MDAwMjc4.X0HDug.skWsFgpUTsqrzfC-hKA1AYJbLpc');
 
