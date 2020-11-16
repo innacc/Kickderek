@@ -35,4 +35,23 @@ Users.prototype.getItems = function() {
 	});
 };
 
+/* esline-diable-next-line func-names */
+	Users.prototype.deleteItems = async function(item) {
+		const userItem = await UserItems.findOne({
+			where: { user_id: this.user_id, item_id: item.id },
+		});
+		
+		if(!userItem){
+			return console.log('no item');
+		}
+		if (userItem) {
+			userItem.amount -= 1;
+			if(userItem.amount == 0){
+				UserItems.destroy({
+					where: { user_id: this.user_id, item_id: item.id },
+				});
+			}
+			return userItem.save();
+		}
+	}
 module.exports = { Users, CurrencyShop, UserItems };
