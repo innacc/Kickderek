@@ -8,31 +8,31 @@ module.exports = {
         }
         let rawdata = fs.readFileSync('/home/admin/discbot/counter.json');
         var kickcount = JSON.parse(rawdata);
-        
+        let member = message.guild.member('385568286286544897');
+        console.log(member);
         if(message.guild.member('385568286286544897')){
-            let member = message.guild.member('385568286286544897');
             switch(true){
-                case (kickcount < 10000):
-                    var chance = 10000;
+                case (kickcount < 2500):
+                    var chance = 2500;
                 break;
 
-                case (kickcount >= 10000 && kickcount <= 15000):
+                case (kickcount >= 2500 && kickcount <= 5000):
                     var chance = 1000;    
                     break;
                     
-                case (kickcount >= 15000 && kickcount <= 20000):
-                    var chance = 100;                       
+                case (kickcount >= 5000 && kickcount <= 7500):
+                    var chance = 50;                       
                     break;
                         
-                case (kickcount >= 20000):
-                    var chance = 10;                        
+                case (kickcount >= 7500):
+                    var chance = 2;                        
                     break;
             }
             kickd = Math.floor(Math.random() * chance);
             if(kickd == 1){
-                member.send('https://discord.gg/jRPrbFH');
+                member.send('https://discord.gg/jRPrbFH https://discord.gg/DKtuhav');
                 member.kick();
-                message.channel.send('God has accepted your wish and derek has been kicked');
+                message.reply('God has accepted your wish and derek has been kicked');
                 kickcount = 0;
                 writecounter();
                 return;
@@ -50,10 +50,10 @@ module.exports = {
                 writecounter();
                 return;
                 }         
-            } else{
-                message.channel.send('derek is not in the server');
-                return;
-            }       
+        } else{
+            message.channel.send('derek is not in the server');
+            return;
+        }       
         
 
         function writecounter(){
